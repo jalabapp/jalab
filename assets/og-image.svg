@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#2EC2B0"/>
+      <stop offset="1" stop-color="#B87842"/>
+    </linearGradient>
+    <style>
+      .bg{fill:url(#g1);opacity:0.08}
+      .logo-t{fill:#383839;font-family: 'IBM Plex Sans Arabic', serif; font-size:120px;font-weight:700}
+      .sub{fill:#64748B;font-family: 'IBM Plex Sans Arabic', serif;font-size:32px}
+    </style>
+  </defs>
+  <rect width="1200" height="630" fill="#fff"/>
+  <rect x="0" y="0" width="1200" height="630" class="bg" />
+  <g transform="translate(80,180)">
+    <text class="logo-t">جلاب</text>
+    <text x="0" y="120" class="sub">مؤسسة جلاب الرقمية — حلول رقمية وشراكات تجارية</text>
+  </g>
+</svg>

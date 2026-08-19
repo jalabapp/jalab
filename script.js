@@ -1,4 +1,4 @@
-// Minimal JS: mobile nav toggle, smooth scroll, simple form submission placeholder, lightweight reveals
+// Enhanced JS: logo animation trigger, animated SVG paths, improved form handling with honeypot and configurable endpoint
 
 document.addEventListener('DOMContentLoaded', function(){
   // Nav toggle
@@ -12,6 +12,21 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 
+  // Logo entrance animation (CSS class)
+  const logo = document.getElementById('siteLogo');
+  if(logo){
+    setTimeout(()=>{ logo.classList.add('logo-entrance'); }, 260);
+  }
+
+  // Animate SVG paths (simple dash offset animation)
+  document.querySelectorAll('.anim-path').forEach(path=>{
+    const len = path.getTotalLength ? path.getTotalLength() : 120;
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.style.transition = 'stroke-dashoffset 900ms ease-out';
+    setTimeout(()=>{ path.style.strokeDashoffset = '0'; }, 420);
+  });
+
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', function(e){
@@ -19,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function(){
       if(target){
         e.preventDefault();
         target.scrollIntoView({behavior:'smooth', block:'start'});
-        // close mobile menu if open
         if(window.innerWidth < 720 && navMenu){
           navMenu.style.display = 'none';
           navToggle && navToggle.setAttribute('aria-expanded','false');
@@ -28,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   });
 
-  // Simple reveal on scroll (very light)
-  const items = document.querySelectorAll('.card, .value, .why-item, .profile-card, .contact-details, .illus');
+  // Simple reveal on scroll
+  const items = document.querySelectorAll('.card, .value, .why-item, .profile-card, .contact-details, .illus, .hero-copy');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(en=>{
       if(en.isIntersecting){
@@ -46,38 +60,48 @@ document.addEventListener('DOMContentLoaded', function(){
     io.observe(it);
   });
 
-  // Contact form: send JSON to placeholder endpoint
+  // Contact form handling
   const form = document.getElementById('contactForm');
   const msg = document.getElementById('formMessage');
+  const formEndpointMeta = document.querySelector('meta[name="form-endpoint"]');
+  const FORM_ENDPOINT = formEndpointMeta ? formEndpointMeta.getAttribute('content') : '/api/contact';
+
   if(form){
     form.addEventListener('submit', async function(e){
       e.preventDefault();
       msg.textContent = '';
       const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
+      const data = Object.fromEntries(formData.entries());
 
-      if(!payload.name || !payload.email){
-        msg.textContent = 'يرجى إدخال اسمك والبريد الإلكتروني.';
+      // Honeypot check
+      if(data.website){
+        msg.textContent = 'تم اكتشاف محتوى مُشتبه. إذا كنت إنسانًا، أعد المحاولة.';
+        return;
+      }
+
+      if(!data.name || !data.email){
+        msg.textContent = 'يرجى إدخال الاسم والبريد الإلكتروني.';
         return;
       }
 
       try {
-        // TODO: استبدل هذا المسار بنقطة النهاية الفعلية (مثلاً: https://api.yoursite.com/contact)
-        const res = await fetch('/api/contact', {
+        const res = await fetch(FORM_ENDPOINT, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(payload)
+          body: JSON.stringify(data)
         });
         if(res.ok){
-          msg.textContent = 'تم استلام رسالتك. سنوافيكم بالرد قريباً.';
+          msg.textContent = 'تم استلام رسالتك. سنوافيكم بالرد قريبًا.';
           form.reset();
         } else {
-          msg.textContent = 'حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.';
+          // Some form services return 200 even on error — handle generically
+          msg.textContent = 'تم إرسال الطلب، لكن حدثت استجابة غير متوقعة من الخادم.';
         }
-      } catch (err) {
-        console.error(err);
-        msg.textContent = 'تعذر الاتصال بالخادم. تحقق من الاتصال أو حاول لاحقًا.';
+      } catch(err){
+        console.error('Form submit error', err);
+        msg.textContent = 'تعذر الاتصال بخدمة الإرسال. يمكنك إرسال بريد إلى contact@example.com';
       }
     });
   }
+
 });
