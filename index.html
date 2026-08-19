@@ -14,13 +14,16 @@
   <meta property="og:description" content="مؤسسة سعودية تقدم خدمات وحلول رقمية موثوقة وعصرية." />
   <meta property="og:url" content="https://jalabapp.github.io/jalab/" />
   <meta property="og:site_name" content="مؤسسة جلاب الرقمية" />
-  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image" content="assets/og-image.svg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico" />
+  <!-- Theme & Favicon -->
+  <meta name="theme-color" content="#2EC2B0">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -46,7 +49,7 @@
   <header class="site-header" id="top">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="مؤسسة جلاب الرقمية — الرئيسية">
-        <img src="assets/logo.svg" alt="شعار مؤسسة جلاب الرقمية" class="logo" />
+        <img src="assets/logo.svg" alt="شعار مؤسسة جلاب الرقمية" class="logo logo-anim" id="siteLogo" />
       </a>
 
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="قائمة">
@@ -63,7 +66,7 @@
 
       <div class="nav-ctas">
         <a class="btn btn-outline" href="#about">تعرف علينا</a>
-        <a class="btn btn-primary" href="#contact">تواصل معنا</a>
+        <a class="btn btn-primary cta" href="#contact">تواصل معنا</a>
       </div>
     </div>
   </header>
@@ -71,19 +74,30 @@
   <main>
     <!-- Hero -->
     <section id="hero" class="hero section">
+      <div class="hero-bg">
+        <!-- subtle pattern -->
+        <svg class="hero-pattern" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#2EC2B0" stop-opacity="0.06"/><stop offset="1" stop-color="#B87842" stop-opacity="0.04"/></linearGradient>
+          </defs>
+          <rect width="600" height="200" fill="url(#hg)" />
+        </svg>
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-copy">
           <h1 class="site-title">جلاب الرقمية</h1>
           <h2 class="site-subtitle">حلول رقمية وخدمات تقنية تواكب تطور الأعمال</h2>
           <p class="lead">مؤسسة سعودية متخصصة في تقديم الخدمات والحلول الرقمية، ونسعى إلى تقديم تجارب رقمية عملية وموثوقة تلبي احتياجات الأفراد والمنشآت.</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary" href="#about">تعرف علينا</a>
+            <a class="btn btn-primary cta" href="#about">تعرف علينا</a>
             <a class="btn btn-secondary" href="#contact">تواصل معنا</a>
           </div>
           <p class="small-muted meta">السجل التجاري: 7053055955</p>
         </div>
 
         <div class="hero-visual" aria-hidden="true">
+          <!-- interactive svg device illustration -->
           <svg viewBox="0 0 480 320" class="illus" role="img" aria-hidden="true">
             <defs>
               <linearGradient id="grad" x1="0" x2="1">
@@ -93,8 +107,8 @@
             </defs>
             <rect x="10" y="30" rx="12" width="460" height="260" fill="#fff" stroke="#E6EEF8"/>
             <g transform="translate(40,70)" fill="none" stroke="url(#grad)" stroke-width="3" stroke-linecap="round">
-              <path d="M0 40 C40 0, 120 0, 160 40" />
-              <path d="M40 80 C80 40, 160 40, 200 80" />
+              <path class="anim-path" d="M0 40 C40 0, 120 0, 160 40" />
+              <path class="anim-path" d="M40 80 C80 40, 160 40, 200 80" />
               <circle cx="240" cy="40" r="8" fill="#2EC2B0"/>
               <rect x="8" y="110" width="120" height="12" rx="6" fill="#F8FAFC" stroke="#E6EEF8"/>
               <rect x="160" y="110" width="120" height="12" rx="6" fill="#F8FAFC" stroke="#E6EEF8"/>
@@ -129,21 +143,25 @@
 
         <div class="cards-grid">
           <article class="card" tabindex="0">
+            <div class="card-ico">🔧</div>
             <h3>الخدمات الرقمية</h3>
             <p>تقديم حلول وخدمات رقمية تلبي احتياجات العملاء والمنشآت.</p>
           </article>
 
           <article class="card" tabindex="0">
+            <div class="card-ico">🛒</div>
             <h3>التجارة الإلكترونية</h3>
             <p>تطوير وإدارة قنوات ومنتجات رقمية عبر التجارة الإلكترونية.</p>
           </article>
 
           <article class="card" tabindex="0">
+            <div class="card-ico">⚙️</div>
             <h3>الخدمات التقنية</h3>
             <p>تقديم خدمات تقنية تساعد على تطوير وتسهيل العمليات الرقمية.</p>
           </article>
 
           <article class="card" tabindex="0">
+            <div class="card-ico">💡</div>
             <h3>الحلول الرقمية</h3>
             <p>توفير حلول ومنتجات رقمية تواكب احتياجات السوق.</p>
           </article>
@@ -226,55 +244,5 @@
               <span>الاسم</span>
               <input type="text" name="name" placeholder="الاسم الكامل" required />
             </label>
-            <label>
-              <span>البريد الإلكتروني</span>
-              <input type="email" name="email" placeholder="name@example.com" required />
-            </label>
-            <label>
-              <span>رقم الجوال</span>
-              <input type="tel" name="phone" placeholder="+9665XXXXXXXX" />
-            </label>
-            <label class="full">
-              <span>الرسالة</span>
-              <textarea name="message" rows="5" placeholder="نص الرسالة"></textarea>
-            </label>
 
-            <input type="hidden" name="cr_number" value="7053055955" />
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">إرسال</button>
-              <p class="small-muted">سوف نتواصل معكم بعد استلام الطلب.</p>
-            </div>
-
-            <div id="formMessage" role="status" aria-live="polite" class="form-message"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h3>مؤسسة جلاب الرقمية</h3>
-        <p class="muted">حلول رقمية تواكب تطور الأعمال.</p>
-        <p class="muted small">السجل التجاري: 7053055955</p>
-      </div>
-
-      <nav aria-label="روابط سريعة">
-        <ul class="footer-links">
-          <li><a href="#top">الرئيسية</a></li>
-          <li><a href="#about">من نحن</a></li>
-          <li><a href="#services">خدماتنا</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
-        </ul>
-      </nav>
-
-      <div class="legal">
-        <p>© 2026 مؤسسة جلاب الرقمية — جميع الحقوق محفوظة.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+{
